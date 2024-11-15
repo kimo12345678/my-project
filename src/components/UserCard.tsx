@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { useForm } from 'react-hook-form';
-import { Button, TextField, Typography } from '@mui/material';
+import React, { useState } from "react";
+import { useQuery, gql } from "@apollo/client";
+import { useForm } from "react-hook-form";
+import { Button, TextField, Typography } from "@mui/material";
 
 const GET_USER_QUERY = gql`
   query User($userId: Int!) {
@@ -10,6 +10,16 @@ const GET_USER_QUERY = gql`
       fatherName
       grandfatherName
       familyName
+      localizedName {
+        firstName
+        fatherName
+        grandfatherName
+        familyName
+      }
+      nationalId {
+        idNumber
+        expiryDate
+      }
       nationalities {
         country {
           id
@@ -17,6 +27,11 @@ const GET_USER_QUERY = gql`
         }
         countryId
       }
+      maritalStatus {
+        id
+        name
+      }
+      dependants
     }
   }
 `;
@@ -55,9 +70,9 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
   const user: User = data.user;
 
   // Handle the save functionality
-  const onSave = (data: any) => {
-    console.log("Saving user data:", data);
-    // Here, you would send the data to the backend to save it
+  const onSave = (formData: any) => {
+    console.log("Saving user data:", formData);
+    // Implement save functionality here
   };
 
   return (
@@ -68,28 +83,54 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
           <TextField
             label="First Name"
             defaultValue={user.firstName}
-            {...register('firstName')}
+            {...register("firstName")}
             className="my-2"
           />
           <TextField
             label="Father's Name"
             defaultValue={user.fatherName}
-            {...register('fatherName')}
+            {...register("fatherName")}
             className="my-2"
           />
           <TextField
             label="Grandfather's Name"
             defaultValue={user.grandfatherName}
-            {...register('grandfatherName')}
+            {...register("grandfatherName")}
             className="my-2"
           />
           <TextField
             label="Family Name"
             defaultValue={user.familyName}
-            {...register('familyName')}
+            {...register("familyName")}
             className="my-2"
           />
-          <Button type="submit" variant="contained" color="primary">Save</Button>
+          <TextField
+            label="National ID Number"
+            defaultValue={user.nationalId.idNumber}
+            {...register("idNumber")}
+            className="my-2"
+          />
+          <TextField
+            label="National ID Expiry Date"
+            defaultValue={user.nationalId.expiryDate}
+            {...register("expiryDate")}
+            className="my-2"
+          />
+          <TextField
+            label="Marital Status"
+            defaultValue={user.maritalStatus.name}
+            {...register("maritalStatus")}
+            className="my-2"
+          />
+          <TextField
+            label="Dependants"
+            defaultValue={user.dependants}
+            {...register("dependants")}
+            className="my-2"
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Save
+          </Button>
         </form>
       ) : (
         <div>
@@ -97,7 +138,15 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
           <p>Father's Name: {user.fatherName}</p>
           <p>Grandfather's Name: {user.grandfatherName}</p>
           <p>Family Name: {user.familyName}</p>
-          <Button variant="contained" color="secondary" onClick={() => setIsEditing(true)}>
+          <p>National ID Number: {user.nationalId.idNumber}</p>
+          <p>National ID Expiry Date: {user.nationalId.expiryDate}</p>
+          <p>Marital Status: {user.maritalStatus.name}</p>
+          <p>Dependants: {user.dependants}</p>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setIsEditing(true)}
+          >
             Edit
           </Button>
         </div>
