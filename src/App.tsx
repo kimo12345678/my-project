@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"; // ApolloClient import
+import { UserCard } from "./components/UserCard"; // Adjust path as necessary
 
-function App() {
-  return (
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql", // Backend GraphQL server URL
+  cache: new InMemoryCache(),
+});
+
+const App: React.FC = () => (
+  <ApolloProvider client={client}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserCard userId={1} /> {/* Pass userId from the backend */}
     </div>
-  );
-}
+  </ApolloProvider>
+);
 
 export default App;
