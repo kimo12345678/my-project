@@ -91,81 +91,103 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
       </div>
 
       {/* Main Content */}
-      <div style={{ height: "95%", overflowY: "auto", padding: "2rem" }}>
-        <Typography variant="h6">Basic Information</Typography>
-        {isEditing ? (
-          <form onSubmit={handleSubmit(onSave)}>
-            <TextField
-              label="First Name"
-              defaultValue={user.firstName}
-              {...register("firstName")}
-              className="my-2"
-            />
-            <TextField
-              label="Father's Name"
-              defaultValue={user.fatherName}
-              {...register("fatherName")}
-              className="my-2"
-            />
-            <TextField
-              label="Grandfather's Name"
-              defaultValue={user.grandfatherName}
-              {...register("grandfatherName")}
-              className="my-2"
-            />
-            <TextField
-              label="Family Name"
-              defaultValue={user.familyName}
-              {...register("familyName")}
-              className="my-2"
-            />
-            <TextField
-              label="National ID Number"
-              defaultValue={user.nationalId.idNumber}
-              {...register("idNumber")}
-              className="my-2"
-            />
-            <TextField
-              label="National ID Expiry Date"
-              defaultValue={user.nationalId.expiryDate}
-              {...register("expiryDate")}
-              className="my-2"
-            />
-            <TextField
-              label="Marital Status"
-              defaultValue={user.maritalStatus.name}
-              {...register("maritalStatus")}
-              className="my-2"
-            />
-            <TextField
-              label="Dependants"
-              defaultValue={user.dependants}
-              {...register("dependants")}
-              className="my-2"
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Save
-            </Button>
-          </form>
-        ) : (
-          <div>
-            <p>First Name: {user.firstName}</p>
-            <p>Father's Name: {user.fatherName}</p>
-            <p>Grandfather's Name: {user.grandfatherName}</p>
-            <p>Family Name: {user.familyName}</p>
-            <p>National ID Number: {user.nationalId.idNumber}</p>
-            <p>National ID Expiry Date: {user.nationalId.expiryDate}</p>
-            <p>Marital Status: {user.maritalStatus.name}</p>
-            <p>Dependants: {user.dependants}</p>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => setIsEditing(true)}
-            >
-              Edit
-            </Button>
-          </div>
-        )}
+      <div style={{ display: "flex", height: "95%" }}>
+        {/* Master Section (25% of the height) */}
+        <div
+          style={{
+            width: "25%",
+            backgroundColor: "#f4f4f4", // Optional background color
+            padding: "1rem",
+            borderRight: "2px solid #ddd", // Optional border between sections
+          }}
+        >
+          <Typography variant="h6">Master Section</Typography>
+          <p>Master content goes here</p>
+        </div>
+
+        {/* Basic Information Section (75% of the height) */}
+        <div
+          style={{
+            width: "75%",
+            padding: "2rem",
+            overflowY: "auto",
+          }}
+        >
+          <Typography variant="h6">Basic Information</Typography>
+          {isEditing ? (
+            <form onSubmit={handleSubmit(onSave)}>
+              <TextField
+                label="First Name"
+                defaultValue={user.firstName}
+                {...register("firstName")}
+                className="my-2"
+              />
+              <TextField
+                label="Father's Name"
+                defaultValue={user.fatherName}
+                {...register("fatherName")}
+                className="my-2"
+              />
+              <TextField
+                label="Grandfather's Name"
+                defaultValue={user.grandfatherName}
+                {...register("grandfatherName")}
+                className="my-2"
+              />
+              <TextField
+                label="Family Name"
+                defaultValue={user.familyName}
+                {...register("familyName")}
+                className="my-2"
+              />
+              <TextField
+                label="National ID Number"
+                defaultValue={user.nationalId.idNumber}
+                {...register("idNumber")}
+                className="my-2"
+              />
+              <TextField
+                label="National ID Expiry Date"
+                defaultValue={user.nationalId.expiryDate}
+                {...register("expiryDate")}
+                className="my-2"
+              />
+              <TextField
+                label="Marital Status"
+                defaultValue={user.maritalStatus.name}
+                {...register("maritalStatus")}
+                className="my-2"
+              />
+              <TextField
+                label="Dependants"
+                defaultValue={user.dependants}
+                {...register("dependants")}
+                className="my-2"
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Save
+              </Button>
+            </form>
+          ) : (
+            <div>
+              <p>First Name: {user.firstName}</p>
+              <p>Father's Name: {user.fatherName}</p>
+              <p>Grandfather's Name: {user.grandfatherName}</p>
+              <p>Family Name: {user.familyName}</p>
+              <p>National ID Number: {user.nationalId.idNumber}</p>
+              <p>National ID Expiry Date: {user.nationalId.expiryDate}</p>
+              <p>Marital Status: {user.maritalStatus.name}</p>
+              <p>Dependants: {user.dependants}</p>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
