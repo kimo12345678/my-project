@@ -41,7 +41,7 @@ This project is a **React** application that leverages **Apollo Client** to cons
 #### **2. Installation**
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/kimo12345678/my-project.git
    ```
 2. Navigate to the project directory:
    ```bash
