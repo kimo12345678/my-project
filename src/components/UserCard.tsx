@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Button, TextField, Typography } from "@mui/material";
+import Header from "./Header"; // Import the new Header component
 
 const GET_USER_QUERY = gql`
   query User($userId: Int!) {
@@ -61,7 +62,7 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
     variables: { userId },
   });
 
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isEditing, setIsEditing] = useState(false);
 
   if (loading) return <div>Loading...</div>;
@@ -76,19 +77,14 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div
+      className="flex flex-col h-screen"
+      style={{
+        backgroundColor: "rgb(244, 246, 249)",
+      }}
+    >
       {/* Header */}
-      <div
-        style={{
-          height: "5%",
-          backgroundColor: "#333",
-          color: "#fff",
-          padding: "1rem",
-          textAlign: "center",
-        }}
-      >
-        <Typography variant="h6">Profile Header</Typography>
-      </div>
+      <Header firstName={user.firstName} familyName={user.familyName} />
 
       {/* Main Content */}
       <div style={{ display: "flex", height: "95%" }}>
@@ -96,7 +92,7 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
         <div
           style={{
             width: "25%",
-            backgroundColor: "#f4f4f4", // Optional background color
+
             padding: "1rem",
             borderRight: "2px solid #ddd", // Optional border between sections
           }}
