@@ -9,8 +9,30 @@ const client = new ApolloClient({
 
 const App: React.FC = () => (
   <ApolloProvider client={client}>
-    <div className="App">
-      <UserCard userId={1} /> {/* Pass userId from the backend */}
+    <div className="App" style={{ display: "flex", height: "100vh" }}>
+      {/* Sidebar */}
+      <div
+        style={{
+          width: "5%", 
+          backgroundColor: "#333", // Sidebar background color
+          color: "#fff", // Sidebar text color
+          padding: "1rem", // Padding inside sidebar
+        }}
+      >
+        Sidebar
+      </div>
+
+      {/* Main content (UserCard) */}
+      <div
+        style={{
+          width: "95%",
+           
+          padding: "0", // Padding around UserCard content
+          overflowY: "auto", // Allow scrolling if content exceeds viewport height
+        }}
+      >
+        <UserCard userId={1} /> {/* Pass userId from the backend */}
+      </div>
     </div>
   </ApolloProvider>
 );
