@@ -24,6 +24,7 @@ interface InformationCardProps {
     };
     drivingLicense: { hasLicense: boolean; type: string; expiryDate: string };
     militaryStatus: { requiresTravelPermit: boolean; status: string; document: string };
+    financial?: { bankName: string; iban: string }; // Optional financial data
   };
   selectedTab: string;
 }
@@ -56,6 +57,7 @@ const InformationCard: React.FC<InformationCardProps> = ({ user, selectedTab }) 
     <Box sx={{ width: "80%", margin: "0 auto", padding: "2rem", backgroundColor: "#f8f9fa" }}>
       {selectedTab === "personal" && (
         <>
+          {/* Render personal information sections */}
           {renderSection("Basic Information", (
             <>
               <Typography>National ID Number: {user.nationalId.idNumber}</Typography>
@@ -108,6 +110,17 @@ const InformationCard: React.FC<InformationCardProps> = ({ user, selectedTab }) 
               <Typography>Require Travel Permit: {user.militaryStatus?.requiresTravelPermit ? "Yes" : "No"}</Typography>
               <Typography>Military Status: {user.militaryStatus?.status}</Typography>
               <Typography>Document: {user.militaryStatus?.document}</Typography>
+            </>
+          ))}
+        </>
+      )}
+
+      {selectedTab === "financial" && (
+        <>
+          {renderSection("Bank Information", (
+            <>
+              <Typography>Bank Name: {user.financial?.bankName || "CIB"}</Typography>
+              <Typography>IBAN: {user.financial?.iban || "12346546413216446"}</Typography>
             </>
           ))}
         </>
