@@ -1,46 +1,161 @@
-# Getting Started with Create React App
+### README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## **React Apollo Project**
 
-In the project directory, you can run:
+This project is a **React** application that leverages **Apollo Client** to consume a GraphQL backend. It is styled using **Material-UI (MUI)** for global styles and **TailwindCSS** for custom layouts. The app showcases a **User Dashboard** with dynamic content for profile, personal, and financial information.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### **Features**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **GraphQL Integration**:
+   - Uses Apollo Client for data fetching from a GraphQL server.
+   - Fetches user data dynamically based on `userId`.
 
-### `npm test`
+2. **Material-UI & TailwindCSS**:
+   - Combines MUI for global styles (`CssBaseline`) with TailwindCSS for layout and utility classes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Reusable Components**:
+   - **`UserCard`**: Displays user profile details and dynamically updates based on selected tabs (e.g., Personal, Financial).
+   - **`ProfileCard`**: Renders user's profile with navigation buttons for different information tabs.
+   - **`Sidebar`**: Navigation menu with interactive icons.
+   - **`Header`**: Top navigation bar with breadcrumbs and action buttons (e.g., notifications, settings).
+   - **`InformationCard`**: Displays user details across multiple tabs (e.g., Personal, Financial). Supports inline editing and saves updates via GraphQL mutation.
 
-### `npm run build`
+4. **Dynamic State Management**:
+   - Implements `useState` hooks for interactive elements like tab selection and sidebar navigation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. **Responsive Design**:
+   - Adapts to different screen sizes with modern CSS techniques.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **Setup Instructions**
 
-### `npm run eject`
+#### **1. Prerequisites**
+- Node.js installed on your machine.
+- A running GraphQL server at `http://localhost:4000/graphql`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### **2. Installation**
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd my-project
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### **3. Run the App**
+1. Start the development server:
+   ```bash
+   npm start
+   ```
+2. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### **File Structure**
+```plaintext
+src/
+├── components/
+│   ├── Header.tsx          # Top navigation bar
+│   ├── InformationCard.tsx # Displays user details (not included in the example)
+│   ├── ProfileCard.tsx     # User profile component with tabs
+│   ├── Sidebar.tsx         # Sidebar navigation with icons
+│   └── UserCard.tsx        # Main user details component
+├── assets/
+│   ├── logo.png            # Logo for sidebar
+│   └── photo.jpg           # Placeholder for profile image
+├── App.tsx                 # Main application entry point
+└── index.tsx               # Renders the app
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **GraphQL Schema**
+Ensure your GraphQL server supports the following query:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```graphql
+query User($userId: Int!) {
+  user(userId: $userId) {
+    firstName
+    fatherName
+    grandfatherName
+    familyName
+    localizedName {
+      firstName
+      fatherName
+      grandfatherName
+      familyName
+    }
+    nationalId {
+      idNumber
+      expiryDate
+    }
+    maritalStatus {
+      name
+    }
+    dependants
+    contactInfo {
+      email
+      mobile
+    }
+    emergencyContact {
+      name
+      relation
+      phone
+    }
+    address {
+      country
+      city
+      postalCode
+      building
+      street
+      floorNo
+      apartment
+    }
+    drivingLicense {
+      hasLicense
+      type
+      expiryDate
+    }
+  }
+}
+```
+
+---
+
+### **Customization**
+
+1. **GraphQL Endpoint**:
+   Update the GraphQL URI in `App.tsx`:
+   ```javascript
+   uri: "http://localhost:4000/graphql",
+   ```
+
+2. **User Profile Placeholder**:
+   Replace `photo.jpg` and `logo.png` in the `assets` folder with actual images.
+
+3. **Styling**:
+   Modify styles in `ProfileCard.tsx`, `Sidebar.tsx`, or other components as needed.
+
+---
+
+### **Dependencies**
+
+- **React**: ^18.x
+- **Apollo Client**: ^3.x
+- **GraphQL**: ^16.x
+- **Material-UI**: ^5.x
+- **React Icons**: ^4.x
+- **TailwindCSS**: ^3.x
+
+---
+
