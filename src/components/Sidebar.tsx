@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaThLarge, FaClock, FaFileAlt, FaUsers, FaCube } from "react-icons/fa"; // Import necessary icons
-import logo from '../assets/logo.png';  // Adjust relative path if necessary
+import logo from "../assets/logo.png"; // Adjust relative path if necessary
 
 const Sidebar: React.FC = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);
@@ -50,7 +50,8 @@ const Sidebar: React.FC = () => {
             key={item.index}
             onClick={() => handleButtonClick(item.index)}
             style={{
-              backgroundColor: item.index === activeButton ? "#007BFF" : "transparent", // Highlight active button
+              backgroundColor:
+                item.index === activeButton ? "#007BFF" : "transparent", // Highlight active button
               border: "none",
               color: item.index === activeButton ? "#fff" : "lightgray", // Change color for active button
               fontSize: "1.5rem",

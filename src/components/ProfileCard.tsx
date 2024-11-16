@@ -5,9 +5,16 @@ import photo from "../assets/photo.jpg"; // Adjust relative path if necessary
 export interface ProfileCardProps {
   selectedTab: string;
   onTabChange: (tab: string) => void;
+  firstName: string;
+  familyName: string;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ selectedTab, onTabChange }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  selectedTab,
+  onTabChange,
+  firstName,
+  familyName,
+}) => {
   return (
     <div
       style={{
@@ -21,7 +28,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ selectedTab, onTabChange }) =
     >
       <div style={{ textAlign: "center", marginBottom: "1rem" }}>
         <img
-          src= {photo}
+          src={photo}
           alt="Profile"
           style={{
             width: "100px",
@@ -32,9 +39,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ selectedTab, onTabChange }) =
           }}
         />
         <Typography variant="h6" style={{ fontWeight: 600 }}>
-          John Smith
+          {firstName} {familyName}
         </Typography>
-        <Typography variant="body2" color="textSecondary" style={{ marginTop: "0.25rem" }}>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          style={{ marginTop: "0.25rem" }}
+        >
           Senior Product Manager
         </Typography>
       </div>

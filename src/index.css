@@ -1,0 +1,15 @@
+/* index.css or any other custom CSS file */
+.customdisplay {
+    display: flex;
+   
+  }
+  /* styles.css or App.css */
+.custom-content {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 100%;
+  }
+.custommain{
+    display: contents;
+}

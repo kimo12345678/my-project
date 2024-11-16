@@ -66,34 +66,22 @@ export const UserCard: React.FC<{ userId: number }> = ({ userId }) => {
   const user = data.user;
 
   return (
-    <div
-      className="flex flex-col h-screen"
-      style={{
-        backgroundColor: "rgb(244, 246, 249)",
-      }}
-    >
+    <div className="flex flex-col h-screen bg-gray-100 ">
       <Header firstName={user.firstName} familyName={user.familyName} />
 
-      <div style={{ display: "flex", height: "95%" }}>
+      <div className="flex h-[95%] customdisplay">
         {/* Sidebar Section */}
-        <div
-          style={{
-            width: "30%",
-            padding: "1rem",
-            borderRight: "2px solid #ddd",
-          }}
-        >
-          <ProfileCard selectedTab={selectedTab} onTabChange={setSelectedTab} />
+        <div className="w-[30%] p-4 border-r-2 border-gray-300">
+          <ProfileCard
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            firstName={user.firstName}
+            familyName={user.familyName}
+          />
         </div>
 
         {/* Main Content Section */}
-        <div
-          style={{
-            width: "70%",
-            padding: "2rem",
-            overflowY: "auto",
-          }}
-        >
+        <div className="w-[70%] p-8 overflow-y-auto custommain">
           <InformationCard user={user} selectedTab={selectedTab} />
         </div>
       </div>
